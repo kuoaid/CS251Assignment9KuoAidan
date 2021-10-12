@@ -13,8 +13,7 @@ void init(Vector *vector, int memorySize) {
 
 void print(Vector *vector){
     for (int i = 0; i < vector->size; i++) {
-        int printed_num = vector->array[i];
-        printf("%i",printed_num);
+        printf("%i",vector->array[i]);
     }
     printf("\n");
 }
@@ -28,7 +27,7 @@ int insert(Vector *vector, int location, int value) {
     }
 
     //If future size is bigger
-    if((sizeof(value) + sizeof(*vector)) > vector->memorySize){
+    if((sizeof(value) + sizeof(int)*vector->size) > sizeof(int)*vector->memorySize){
         //update the recorded memory size.
         vector->memorySize = vector->memorySize*2;
 
@@ -62,7 +61,7 @@ int insert(Vector *vector, int location, int value) {
 }
 
 int get(Vector *vector, int location, int *value){
-    if(location == 0 || location >= vector->size){
+    if(location < 0 || location >= vector->size){
         return 0;
     }
     *value = vector->array[location];
